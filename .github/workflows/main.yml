@@ -39,7 +39,8 @@ jobs:
               with:
                   name: Desktop Application
                   path: |
-                    ./dist/electron-demo_1.0.0_amd64.snap
+                    ./dist/electron-demo Setup 1.0.0.exe
+                    # ./dist/electron-demo_1.0.0_amd64.snap
                     # ./dist/electron-demo-1.0.0.tar.xz
 
             
