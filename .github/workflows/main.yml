@@ -22,8 +22,8 @@ jobs:
 
             - name: Install dependencies
               run: |
-                npm install
-                npm install -g electron-builder
+                npm install -y
+                npm install -g electron-builder -y
                 electron-builder --linux
                 electron-builder --linux tar.xz
 
