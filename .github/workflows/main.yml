@@ -5,11 +5,39 @@ on:
     branches: [ "main" ]
 
 jobs:
-    build:
+    Ubuntu-Build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Check out Git repository
+              uses: actions/checkout@v2
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                node-version: 18
+    
+            - name: Install dependencies
+              env:
+                GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+              run: |
+                npm install -y
+                npm install -g electron-builder -y
+                electron-builder --linux
+                electron-builder --linux tar.xz
+
+            - name: upload app
+              if: always()
+              continue-on-error: true
+              uses: actions/upload-artifact@master
+              with:
+                  name: Desktop Application
+                  path: |
+                    ./dist/electron-demo_1.0.0_amd64.snap
+                    ./dist/electron-demo-1.0.0.tar.xz
+        
+    Windows-Build:
         runs-on: windows-latest
-        # strategy:
-        #     matrix:
-        #         os: [macos-latest, ubuntu-latest, windows-latest]
 
         steps:
             - name: Check out Git repository
@@ -27,21 +55,15 @@ jobs:
                 npm install -y
                 npm install -g electron-builder -y
                 electron-builder --win
-                ls ./dist
-                # electron-builder --mwl tar.xz
-                # electron-builder --linux
-                # electron-builder --linux tar.xz
 
             - name: upload app
               if: always()
               continue-on-error: true
               uses: actions/upload-artifact@master
               with:
-                  name: Desktop Application
-                  path: |
-                    ./dist/electron-demo Setup 1.0.0.exe
-                    # ./dist/electron-demo_1.0.0_amd64.snap
-                    # ./dist/electron-demo-1.0.0.tar.xz
+                name: Desktop Application
+                path: |
+                  ./dist/electron-demo Setup 1.0.0.exe
 
             
       
