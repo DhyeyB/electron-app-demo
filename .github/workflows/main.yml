@@ -27,7 +27,7 @@ jobs:
                 npm install -y
                 npm install -g electron-builder -y
                 electron-builder --mwl
-                electron-builder --mwl tar.xz
+                # electron-builder --mwl tar.xz
                 # electron-builder --linux
                 # electron-builder --linux tar.xz
 
@@ -39,7 +39,7 @@ jobs:
                   name: Desktop Application
                   path: |
                     ./dist/electron-demo_1.0.0_amd64.snap
-                    ./dist/electron-demo-1.0.0.tar.xz
+                    # ./dist/electron-demo-1.0.0.tar.xz
 
             
       
