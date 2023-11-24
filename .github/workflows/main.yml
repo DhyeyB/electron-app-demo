@@ -20,12 +20,19 @@ jobs:
               with:
                 node-version: 18
 
-            - name: Install dependencies
-              run: |
-                npm install -y
-                npm install -g electron-builder -y
-                electron-builder --linux
-                electron-builder --linux tar.xz
+            - name: Build/release Electron app
+              uses: samuelmeuli/action-electron-builder@v1
+              with:
+                # GitHub token, automatically provided to the action
+                # (No need to define this secret in the repo settings)
+                github_token: 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
+    
+            # - name: Install dependencies
+            #   run: |
+            #     npm install -y
+            #     npm install -g electron-builder -y
+            #     electron-builder --linux
+            #     electron-builder --linux tar.xz
 
             - name: upload app
               if: always()
