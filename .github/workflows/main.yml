@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-    Macos-Build:
+    Build:
         runs-on: macos-latest
 
         steps:
@@ -23,7 +23,7 @@ jobs:
               run: |
                 npm install -y
                 npm install -g electron-builder -y
-                electron-builder --mac --linux tar.xz --win 
+                electron-builder --mac --linux --win 
                 ls ./dist
 
             - name: upload app
@@ -31,12 +31,10 @@ jobs:
               continue-on-error: true
               uses: actions/upload-artifact@master
               with:
-                  name: Macos Desktop Application
+                  name: Desktop Application
                   path: |
                     ./dist/electron-demo-1.0.0.dmg
-                    ./dist/electron-demo-1.0.0-mac.zip
                     ./dist/electron-demo_1.0.0_amd64.snap
-                    ./dist/electron-demo-1.0.0.tar.xz
                     ./dist/electron-demo Setup 1.0.0.exe
 
     # Ubuntu-Build:
