@@ -1,0 +1,41 @@
+name: Electron Desktop App Build
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        # strategy:
+        #     matrix:
+        #         os: [macos-latest, ubuntu-latest, windows-latest]
+
+        steps:
+            - name: Check out Git repository
+              uses: actions/checkout@v2
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                node-version: 18
+
+            - name: Install dependencies
+              run: |
+                npm install
+                npm install -g electron-builder
+                electron-builder --linux
+                electron-builder --linux tar.xz
+
+            - name: upload app
+              if: always()
+              continue-on-error: true
+              uses: actions/upload-artifact@master
+              with:
+                  name: Desktop Application
+                  path: |
+                    ./dist/electron-demo_1.0.0_amd64.snap
+                    ./dist/electron-demo-1.0.0.tar.xz
+
+            
+      
