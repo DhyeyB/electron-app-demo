@@ -23,18 +23,22 @@ jobs:
               run: |
                 npm install -y
                 npm install -g electron-builder -y
-                electron-builder
+                npm install --save-dev @electron-forge/cli -y
+                npx electron-forge import -y
+                apt-get install rpm -y
+                npm run make
+                # electron-builder
                 ls ./dist
 
-            - name: upload app
-              if: always()
-              continue-on-error: true
-              uses: actions/upload-artifact@master
-              with:
-                  name: Macos Desktop Application
-                  path: |
-                    ./dist/electron-demo-1.0.0.dmg
-                    ./dist/electron-demo-1.0.0-mac.zip
+            # - name: upload app
+            #   if: always()
+            #   continue-on-error: true
+            #   uses: actions/upload-artifact@master
+            #   with:
+            #       name: Macos Desktop Application
+            #       path: |
+            #         ./dist/electron-demo-1.0.0.dmg
+            #         ./dist/electron-demo-1.0.0-mac.zip
 
     # Ubuntu-Build:
     #     runs-on: ubuntu-latest
