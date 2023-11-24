@@ -24,6 +24,7 @@ jobs:
                 npm install -y
                 npm install -g electron-builder -y
                 electron-builder
+                ls ./dist
 
             - name: upload app
               if: always()
