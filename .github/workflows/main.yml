@@ -6,7 +6,7 @@ on:
 
 jobs:
     Ubuntu-Build:
-        runs-on: ubuntu-latest
+        runs-on: macos-latest
 
         steps:
             - name: Check out Git repository
@@ -17,53 +17,84 @@ jobs:
               with:
                 node-version: 18
     
-            - name: Install dependencies
+            - name: Build Electron Desktop App
               env:
                 GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
               run: |
                 npm install -y
                 npm install -g electron-builder -y
-                electron-builder --linux
-                electron-builder --linux tar.xz
+                # electron-builder --linux
+                # electron-builder --linux tar.xz
 
-            - name: upload app
-              if: always()
-              continue-on-error: true
-              uses: actions/upload-artifact@master
-              with:
-                  name: Desktop Application
-                  path: |
-                    ./dist/electron-demo_1.0.0_amd64.snap
-                    ./dist/electron-demo-1.0.0.tar.xz
+            # - name: upload app
+            #   if: always()
+            #   continue-on-error: true
+            #   uses: actions/upload-artifact@master
+            #   with:
+            #       name: Ubuntu Desktop Application
+            #       path: |
+            #         ./dist/electron-demo_1.0.0_amd64.snap
+            #         ./dist/electron-demo-1.0.0.tar.xz
+
+    # Ubuntu-Build:
+    #     runs-on: ubuntu-latest
+
+    #     steps:
+    #         - name: Check out Git repository
+    #           uses: actions/checkout@v2
+
+    #         - name: Setup Node.js
+    #           uses: actions/setup-node@v3
+    #           with:
+    #             node-version: 18
+    
+    #         - name: Build Electron Desktop App
+    #           env:
+    #             GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+    #           run: |
+    #             npm install -y
+    #             npm install -g electron-builder -y
+    #             electron-builder --linux
+    #             electron-builder --linux tar.xz
+
+    #         - name: upload app
+    #           if: always()
+    #           continue-on-error: true
+    #           uses: actions/upload-artifact@master
+    #           with:
+    #               name: Ubuntu Desktop Application
+    #               path: |
+    #                 ./dist/electron-demo_1.0.0_amd64.snap
+    #                 ./dist/electron-demo-1.0.0.tar.xz
         
-    Windows-Build:
-        runs-on: windows-latest
+    # Windows-Build:
+    #     runs-on: windows-latest
 
-        steps:
-            - name: Check out Git repository
-              uses: actions/checkout@v2
+    #     steps:
+    #         - name: Check out Git repository
+    #           uses: actions/checkout@v2
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v3
-              with:
-                node-version: 18
+    #         - name: Setup Node.js
+    #           uses: actions/setup-node@v3
+    #           with:
+    #             node-version: 18
     
-            - name: Install dependencies
-              env:
-                GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-              run: |
-                npm install -y
-                npm install -g electron-builder -y
-                electron-builder --win
+    #         - name: Build Electron Desktop App
+    #           env:
+    #             GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+    #           run: |
+    #             npm install -y
+    #             npm install -g electron-builder -y
+    #             electron-builder --win
 
-            - name: upload app
-              if: always()
-              continue-on-error: true
-              uses: actions/upload-artifact@master
-              with:
-                name: Desktop Application
-                path: |
-                  ./dist/electron-demo Setup 1.0.0.exe
+    #         - name: upload app
+    #           if: always()
+    #           continue-on-error: true
+    #           uses: actions/upload-artifact@master
+    #           with:
+    #             name: Windows Desktop Application
+    #             path: |
+    #               ./dist/electron-demo Setup 1.0.0.exe
 
             
       
