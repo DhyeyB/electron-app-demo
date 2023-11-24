@@ -23,7 +23,7 @@ jobs:
               run: |
                 npm install -y
                 npm install -g electron-builder -y
-                electron-builder --linux
+                electron-builder --win
                 ls ./dist
 
             - name: upload app
@@ -36,25 +36,25 @@ jobs:
                     ./dist/electron-demo-1.0.0.dmg
                     ./dist/electron-demo-1.0.0-mac.zip
 
-    # Ubuntu-Build:
-    #     runs-on: ubuntu-latest
+    Ubuntu-Build:
+        runs-on: ubuntu-latest
 
-    #     steps:
-    #         - name: Check out Git repository
-    #           uses: actions/checkout@v2
+        steps:
+            - name: Check out Git repository
+              uses: actions/checkout@v2
 
-    #         - name: Setup Node.js
-    #           uses: actions/setup-node@v3
-    #           with:
-    #             node-version: 18
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                node-version: 18
     
-    #         - name: Build Electron Desktop App
-    #           env:
-    #             GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-    #           run: |
-    #             npm install -y
-    #             npm install -g electron-builder -y
-    #             electron-builder --linux
+            - name: Build Electron Desktop App
+              env:
+                GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+              run: |
+                npm install -y
+                npm install -g electron-builder -y
+                electron-builder --mac
     #             electron-builder --linux tar.xz
 
     #         - name: upload app
