@@ -13,7 +13,7 @@ jobs:
               uses: actions/checkout@v2
 
             - name: Setup Node.js
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v4
               with:
                 node-version: 18
     
@@ -23,7 +23,8 @@ jobs:
               run: |
                 npm install -y
                 npm install -g electron-builder -y
-                # electron-builder --linux
+                electron-builder --mac
+                ls ./dist
                 # electron-builder --linux tar.xz
 
             # - name: upload app
