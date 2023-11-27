@@ -18,8 +18,8 @@ jobs:
           node-version: 18
 
       - name: Build Electron Desktop App
-        # env:
-        #   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           npm install -y
           npm install -g electron-builder -y
