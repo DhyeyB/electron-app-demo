@@ -2,36 +2,36 @@ name: Electron Desktop App Build
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
-    Build:
-        runs-on: macos-latest
+  Build:
+    runs-on: macos-latest
 
-        steps:
-            - name: Check out Git repository
-              uses: actions/checkout@v2
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
-              with:
-                node-version: 18
-    
-            - name: Build Electron Desktop App
-              env:
-                GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-              run: |
-                npm install -y
-                npm install -g electron-builder -y
-                electron-builder --mac --linux --win
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
 
-            - name: upload app
-              if: always()
-              continue-on-error: true
-              uses: actions/upload-artifact@master
-              with:
-                  name: Desktop Application
-                  path: |
-                    ./dist/electron-demo-1.0.0.dmg
-                    ./dist/electron-demo_1.0.0_amd64.snap
-                    ./dist/electron-demo Setup 1.0.0.exe
+      - name: Build Electron Desktop App
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          npm install -y
+          npm install -g electron-builder -y
+          electron-builder --mac --linux --win
+
+      - name: upload app
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@master
+        with:
+          name: Desktop Application
+          path: |
+            ./dist/electron-demo-1.0.0.dmg
+            ./dist/electron-demo_1.0.0_amd64.snap
+            ./dist/electron-demo Setup 1.0.0.exe
