@@ -1,29 +1,61 @@
-name: Electron Desktop App Build
+name: Build/release
 
-on:
-  push:
-    branches: [ "main" ]
+on: push
 
 jobs:
-    Build:
-        runs-on: ubuntu-latest
+  release:
+    runs-on: ${{ matrix.os }}
 
-        steps:
-            - name: Check out Git repository
-              uses: actions/checkout@v2
+    strategy:
+      matrix:
+        os: [macos-latest]
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
-              with:
-                node-version: 18
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v1
+
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10
+
+      - name: Build/release Electron app
+        uses: samuelmeuli/action-electron-builder@v1
+        with:
+          # GitHub token, automatically provided to the action
+          # (No need to define this secret in the repo settings)
+          github_token: ${{ secrets.github_token }}
+
+          # If the commit is tagged with a version (e.g. "v1.0.0"),
+          # release the app after building
+          release: ${{ startsWith(github.ref, 'refs/tags/v') }}
+
+# name: Electron Desktop App Build
+
+# on:
+#   push:
+#     branches: [ "main" ]
+
+# jobs:
+#     Build:
+#         runs-on: ubuntu-latest
+
+#         steps:
+#             - name: Check out Git repository
+#               uses: actions/checkout@v2
+
+#             - name: Setup Node.js
+#               uses: actions/setup-node@v4
+#               with:
+#                 node-version: 18
     
-            - name: Build Electron Desktop App
-              # env:
-              #   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-              run: |
-                npm install -y
-                npm install -g electron-builder -y
-                electron-builder --linux
+#             - name: Build Electron Desktop App
+#               # env:
+#               #   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+#               run: |
+#                 npm install -y
+#                 npm install -g electron-builder -y
+#                 electron-builder --linux
 
             # - name: upload app
             #   if: always()
