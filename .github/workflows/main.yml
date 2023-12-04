@@ -19,11 +19,9 @@ jobs:
         with:
           node-version: 18
 
-      - uses: actions/labeler@v4
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Build Electron Desktop App
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npm install -y
           npm install -g electron-builder -y
