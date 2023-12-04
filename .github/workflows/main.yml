@@ -7,6 +7,8 @@ on:
 jobs:
   Build:
     runs-on: macos-latest
+    permissions:
+      contents: read
 
     steps:
       - name: Check out Git repository
@@ -17,9 +19,11 @@ jobs:
         with:
           node-version: 18
 
+      - uses: actions/labeler@v4
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build Electron Desktop App
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           npm install -y
           npm install -g electron-builder -y
