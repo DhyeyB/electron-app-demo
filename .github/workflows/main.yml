@@ -2,15 +2,24 @@ name: Electron Desktop App Build
 
 on:
   push:
-    branches: ["main"]
+    branches: ["dev"]
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   Build:
     runs-on: macos-latest
-    permissions:
-      contents: read
+    # permissions:
+    #   contents: read
 
     steps:
+      - uses: google-github-actions/release-please-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          release-type: simple
+
       - name: Check out Git repository
         uses: actions/checkout@v2
 
