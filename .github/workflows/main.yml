@@ -4,15 +4,16 @@ on:
   push:
     branches: ["main"]
 
-permissions:
-  contents: write
-  pull-requests: write
+# permissions:
+#   contents: write
+#   pull-requests: write
 
 jobs:
   Build:
     runs-on: macos-latest
-    # permissions:
-    #   contents: read
+    permissions:
+      contents: write
+      pull-requests: write
 
     steps:
       - uses: google-github-actions/release-please-action@v4
@@ -35,7 +36,7 @@ jobs:
           npm install -y
           npm install -g electron-builder -y
           electron-builder --mac --linux --win
-
+          
       # - name: upload app
       #   if: always()
       #   continue-on-error: true
