@@ -36,13 +36,13 @@ jobs:
           npm install -g electron-builder -y
           electron-builder --mac --linux --win
 
-      - name: upload app
-        if: always()
-        continue-on-error: true
-        uses: actions/upload-artifact@master
-        with:
-          name: Desktop Application
-          path: |
-            ./dist/electron-demo-1.0.0.dmg
-            ./dist/electron-demo_1.0.0_amd64.snap
-            ./dist/electron-demo Setup 1.0.0.exe
+      # - name: upload app
+      #   if: always()
+      #   continue-on-error: true
+      #   uses: actions/upload-artifact@master
+      #   with:
+      #     name: Desktop Application
+      #     path: |
+      #       ./dist/electron-demo-1.0.0.dmg
+      #       ./dist/electron-demo_1.0.0_amd64.snap
+      #       ./dist/electron-demo Setup 1.0.0.exe
