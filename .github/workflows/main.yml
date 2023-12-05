@@ -11,8 +11,6 @@ permissions:
 jobs:
   Build:
     runs-on: macos-latest
-    # permissions:
-    #   contents: read
 
     steps:
       - uses: google-github-actions/release-please-action@v4
