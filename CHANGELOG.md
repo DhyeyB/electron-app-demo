@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/DhyeyB/electron-app-demo/compare/v1.1.0...v1.2.0) (2023-12-05)
+
+
+### Features
+
+* testing for semver minor ([9369230](https://github.com/DhyeyB/electron-app-demo/commit/93692304fe3dae1ce9bf510ef2f5902e33fbedd0))
+
 ## [1.1.0](https://github.com/DhyeyB/electron-app-demo/compare/v1.0.0...v1.1.0) (2023-12-05)
 
 
