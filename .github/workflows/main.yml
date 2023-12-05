@@ -29,13 +29,13 @@ jobs:
         with:
           node-version: 18
 
-      - name: Build Electron Desktop App
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          npm install -y
-          npm install -g electron-builder -y
-          electron-builder --mac --linux --win
+      # - name: Build Electron Desktop App
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: |
+      #     npm install -y
+      #     npm install -g electron-builder -y
+      #     electron-builder --mac --linux --win
           
       # - name: upload app
       #   if: always()
