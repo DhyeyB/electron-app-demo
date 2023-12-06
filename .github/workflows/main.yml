@@ -2,7 +2,7 @@ name: Electron Desktop App Build
 
 on:
   push:
-    branches: ["main"]
+    branches: ["dev"]
 
 # permissions:
 #   contents: write
@@ -35,10 +35,10 @@ jobs:
         run: |
           npm install -y
           npm install -g electron-builder -y
-          electron-builder --mac --linux --win
+          electr-builder --mac --linux --win
           
       - name: upload app
-        if: always()
+        # if: always()
         # continue-on-error: true
         uses: actions/upload-artifact@master
         with:
