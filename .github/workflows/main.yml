@@ -47,13 +47,13 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v2
         with:
-          name: Augmet_Desktop_$(date +'%d_%m_%Y')
+          name: Augmet_Desktop
           path: ./downloaded-artifacts
 
       - name: List downloaded artifacts
         run: |
           ls ./downloaded-artifacts
-          zip -r artifacts.zip ./downloaded-artifacts
+          zip -r Augmet_Desktop_$(date +'%d_%m_%Y').zip ./downloaded-artifacts
           ls ./
     
       - name: Bump version and push tag
@@ -66,18 +66,16 @@ jobs:
         id: create_release
         uses: ncipollo/release-action@v1
         with:
-          # files: |
-          #   ./downloaded-artifacts
           token: ${{ secrets.GITHUB_TOKEN }}
           body: ${{ steps.tag_version.outputs.changelog }}
           tag: ${{ steps.tag_version.outputs.new_tag }}
 
-      - name: upload windows artifact
+      - name: upload artifact in the release
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./artifacts.zip
-          asset_name: artifacts.zip
+          asset_path: ./Augmet_Desktop_$(date +'%d_%m_%Y').zip
+          asset_name: Augmet_Desktop_$(date +'%d_%m_%Y').zip
           asset_content_type: application/zip
