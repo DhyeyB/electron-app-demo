@@ -35,7 +35,7 @@ jobs:
         run: |
           npm install -y
           npm install -g electron-builder -y
-          electron-builder --mac --linux --win
+          electron-builder --mac
           
       - name: upload app
         # if: always()
@@ -45,5 +45,5 @@ jobs:
           name: Augmet_Desktop_$(date +'%d_%m_%Y')
           path: |
             ./dist/electron-demo-1.0.0.dmg
-            ./dist/electron-demo_1.0.0_amd64.snap
-            ./dist/electron-demo Setup 1.0.0.exe
+            # ./dist/electron-demo_1.0.0_amd64.snap
+            # ./dist/electron-demo Setup 1.0.0.exe
