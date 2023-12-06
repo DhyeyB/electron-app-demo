@@ -38,7 +38,7 @@ jobs:
         # continue-on-error: true
         uses: actions/upload-artifact@master
         with:
-          name: Augmet_Desktop_$(date +'%d_%m_%Y')
+          name: Augmet_Desktop
           path: |
             ./dist/electron-demo-1.0.0.dmg
             # ./dist/electron-demo_1.0.0_amd64.snap
