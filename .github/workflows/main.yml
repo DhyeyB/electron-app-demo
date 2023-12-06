@@ -12,11 +12,6 @@ jobs:
       pull-requests: write
 
     steps:
-      # - uses: google-github-actions/release-please-action@v4
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     release-type: simple
-
       - name: Check out Git repository
         uses: actions/checkout@v2
 
@@ -34,8 +29,6 @@ jobs:
           electron-builder --mac
           
       - name: upload app
-        # if: always()
-        # continue-on-error: true
         uses: actions/upload-artifact@master
         with:
           name: Augmet_Desktop
@@ -76,6 +69,8 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./Augmet_Desktop_*.zip
-          asset_name: Augmet_Desktop_*.zip
+          asset_path: |
+            ./Augmet_Desktop_$(date +'%d_%m_%Y').zip
+          asset_name: |
+            Augmet_Desktop_$(date +'%d_%m_%Y').zip
           asset_content_type: application/zip
