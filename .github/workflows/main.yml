@@ -41,12 +41,12 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: Augmet_Desktop
-          path: ./downloaded-artifacts
+          path: ./Augmet_Desktop
 
       - name: List downloaded artifacts
         run: |
-          ls ./downloaded-artifacts
-          zip -r Augmet_Desktop.zip ./downloaded-artifacts/*
+          ls ./Augmet_Desktop
+          zip -r Augmet_Desktop.zip ./Augmet_Desktop/
           ls ./
     
       - name: Bump version and push tag
