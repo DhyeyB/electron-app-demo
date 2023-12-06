@@ -56,3 +56,11 @@ jobs:
 
       - name: List downloaded artifacts
         run: ls ./downloaded-artifacts
+    
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ./downloaded-artifacts
+          token: ${{ secrets.GITHUB_TOKEN }}
