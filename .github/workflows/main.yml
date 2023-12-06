@@ -16,10 +16,10 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: google-github-actions/release-please-action@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          release-type: simple
+      # - uses: google-github-actions/release-please-action@v4
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     release-type: simple
 
       - name: Check out Git repository
         uses: actions/checkout@v2
@@ -29,21 +29,21 @@ jobs:
         with:
           node-version: 18
 
-      # - name: Build Electron Desktop App
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   run: |
-      #     npm install -y
-      #     npm install -g electron-builder -y
-      #     electron-builder --mac --linux --win
+      - name: Build Electron Desktop App
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm install -y
+          npm install -g electron-builder -y
+          electron-builder --mac --linux --win
           
-      # - name: upload app
-      #   if: always()
-      #   continue-on-error: true
-      #   uses: actions/upload-artifact@master
-      #   with:
-      #     name: Desktop Application
-      #     path: |
-      #       ./dist/electron-demo-1.0.0.dmg
-      #       ./dist/electron-demo_1.0.0_amd64.snap
-      #       ./dist/electron-demo Setup 1.0.0.exe
+      - name: upload app
+        if: always()
+        # continue-on-error: true
+        uses: actions/upload-artifact@master
+        with:
+          name: Desktop Application
+          path: |
+            ./dist/electron-demo-1.0.0.dmg
+            ./dist/electron-demo_1.0.0_amd64.snap
+            ./dist/electron-demo Setup 1.0.0.exe
