@@ -35,7 +35,7 @@ jobs:
         run: |
           npm install -y
           npm install -g electron-builder -y
-          electr-builder --mac --linux --win
+          electron-builder --mac --linux --win
           
       - name: upload app
         # if: always()
