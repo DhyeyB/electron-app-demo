@@ -46,7 +46,7 @@ jobs:
       - name: List downloaded artifacts
         run: |
           ls ./downloaded-artifacts
-          zip -r Augmet_Desktop.zip ./downloaded-artifacts
+          zip -r Augmet_Desktop.zip ./downloaded-artifacts/*
           ls ./
     
       - name: Bump version and push tag
