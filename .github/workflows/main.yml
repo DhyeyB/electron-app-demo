@@ -46,7 +46,7 @@ jobs:
       - name: List downloaded artifacts
         run: |
           ls ./downloaded-artifacts
-          zip -r Augmet_Desktop_$(date +'%d_%m_%Y').zip ./downloaded-artifacts
+          zip -r Augmet_Desktop.zip ./downloaded-artifacts
           ls ./
     
       - name: Bump version and push tag
@@ -69,8 +69,6 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: |
-            ./Augmet_Desktop_$(date +'%d_%m_%Y').zip
-          asset_name: |
-            Augmet_Desktop_$(date +'%d_%m_%Y').zip
+          asset_path: ./Augmet_Desktop.zip
+          asset_name: Augmet_Desktop.zip
           asset_content_type: application/zip
