@@ -38,7 +38,7 @@ jobs:
           electr-builder --mac --linux --win
           
       - name: upload app
-        # if: always()
+        if: always()
         # continue-on-error: true
         uses: actions/upload-artifact@master
         with:
