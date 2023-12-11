@@ -2,7 +2,7 @@ name: Electron Desktop App Build
 
 on:
   push:
-    branches: ["test"]
+    branches: ["main"]
 
 jobs:
   conventional-commits:
